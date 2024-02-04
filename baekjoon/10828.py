@@ -1,3 +1,5 @@
+# import sys
+# input = sys.stdin.readline
 class stack:
     data = list()
 
@@ -24,3 +26,19 @@ class stack:
             return -1
         else:
             return self.data[len(self.data)-1]
+
+stack = stack()
+num = int(input())
+for _ in range(num):
+    command = list(map(str, input().split()))
+    if len(command)==2:
+        stack.push(int(command[1]))
+    else:
+        if command[0] == "top":
+            print(stack.top())
+        elif command[0] == "size":
+            print(stack.size())
+        elif command[0] == "empty":
+            print(stack.empty())
+        else:
+            print(stack.pop())
