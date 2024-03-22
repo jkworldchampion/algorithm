@@ -1,28 +1,19 @@
-now = 100
-button_can_go = []   # 갈 수 있는 번호
+# 브루트포스
+to_go = int(input())
+broken_button_num = int(input())
+if broken_button_num != 0:
+    broken_button = list(map(int, input().split()))
+else:
+    broken_button = []
 
-# 일단 100번 그대로이면 0을 출력하고, 끝내기
-if to_go==100:
-    print(0)
-    # exit()
+min_can_go = abs(100-to_go)
 
-for i in str(to_go):
-    # 해당 번호가 고장났다면
-    i = int(i)
-    if i in broken_button:
-        # 가장 가까운 고장이 나지 않은 번호로 바꾼다
-        while (i in broken_button):
-            i += 1
-            if i==10:   # 10개가 다 고장 -> 필요
-                i=0 
-        print(i)
-        button_can_go.append(i)
-    # 고장이 안났다면
-    else: 
-        print(i)
-        button_can_go.append(i)
+for i in range(1000000):
+    i = str(i)
 
-result = 0
-for index, i in enumerate(button_can_go):
-    result += i*(10**(len(button_can_go)-1-index))
-print(result-to_go)
+    for j in i:
+        if int(j) in broken_button:
+            break
+    else: # 이런 신기한 if else문도 가능하다.
+        min_can_go = min(min_can_go, abs(int(i)-to_go)+len(str(i)))
+print(min_can_go)
